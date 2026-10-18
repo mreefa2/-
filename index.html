@@ -44,7 +44,7 @@
             transition: background 0.1s ease-out;
         }
 
-        /* إزالة الحواف البيضاء ودمج شعارك بسلاسة تامة مع الخلفية */
+        /* إزالة الحواف البيضاء ودمج الشعار بسلاسة تامة مع الخلفية */
         .creative-logo {
             mix-blend-mode: multiply;
             filter: contrast(1.3) brightness(1.02);
@@ -331,28 +331,31 @@
             </div>
         </section>
 
-        <!-- قسم العداد وحالة البيع -->
+        <!-- قسم العداد وحالة البيع (تم ضبط التناسق بالكامل) -->
         <section class="bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-lg space-y-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto items-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto items-stretch">
                 
                 <!-- وقت المزاد -->
-                <div class="bg-slate-50/80 border border-slate-200 rounded-xl md:rounded-2xl p-4 text-center flex flex-col justify-between space-y-3 shadow-sm">
+                <div class="bg-slate-50/80 border border-slate-200 rounded-xl md:rounded-2xl p-5 text-center flex flex-col justify-between items-center space-y-3 shadow-sm h-full">
                     <span class="text-xs md:text-sm font-extrabold text-emerald-900 block">وقت المزاد المباشر</span>
-                    <div id="timerDisplay" class="text-3xl md:text-4xl font-black text-slate-900">00:00</div>
-                    <div class="flex justify-center items-center gap-2 pt-1">
-                        <button onclick="startTimer()" class="bg-emerald-700 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-emerald-800 transition">بدء</button>
-                        <button onclick="stopTimer()" class="bg-slate-200 text-slate-800 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-slate-300 transition">إيقاف</button>
-                        <button onclick="resetTimer()" class="bg-slate-200 text-slate-800 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-slate-300 transition">تصفير</button>
+                    <div id="timerDisplay" class="text-3xl md:text-4xl font-black text-slate-900 my-auto">00:00</div>
+                    <div class="flex justify-center items-center gap-2 w-full pt-1">
+                        <button onclick="startTimer()" class="bg-emerald-700 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-emerald-800 transition flex-1">بدء</button>
+                        <button onclick="stopTimer()" class="bg-slate-200 text-slate-800 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-slate-300 transition flex-1">إيقاف</button>
+                        <button onclick="resetTimer()" class="bg-slate-200 text-slate-800 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-slate-300 transition flex-1">تصفير</button>
                     </div>
                 </div>
 
-                <!-- زر حالة البيع -->
-                <div class="bg-slate-50/80 border border-slate-200 rounded-2xl p-6 text-center flex flex-col items-center justify-center space-y-3 shadow-sm">
+                <!-- زر حالة البيع (مطابق 100% لمربع وقت المزاد) -->
+                <div class="bg-slate-50/80 border border-slate-200 rounded-xl md:rounded-2xl p-5 text-center flex flex-col justify-between items-center space-y-3 shadow-sm h-full">
                     <span class="text-xs md:text-sm font-extrabold text-emerald-900 block">حالة اللوحة في المزاد</span>
-                    <button onclick="toggleSoldStatus()" id="soldBtn" class="w-full py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-extrabold rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-md active:scale-95">
-                        <i data-lucide="shield-alert" class="w-4 h-4"></i>
-                        <span>تم البيع</span>
-                    </button>
+                    <div class="w-full my-auto flex items-center justify-center">
+                        <button onclick="toggleSoldStatus()" id="soldBtn" class="w-full py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-extrabold rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-md active:scale-95">
+                            <i data-lucide="shield-alert" class="w-4 h-4"></i>
+                            <span>تم البيع</span>
+                        </button>
+                    </div>
+                    <div class="h-[29px]"></div> <!-- عنصر موازنة لمطابقة ارتفاع أزرار التحكم في العداد -->
                 </div>
 
             </div>
@@ -535,7 +538,7 @@
             } else {
                 stamp.classList.remove('active');
                 btn.classList.replace('bg-emerald-600', 'bg-rose-600');
-                btn.classList.replace('hover:bg-rose-700', 'hover:bg-rose-700');
+                btn.classList.replace('hover:bg-emerald-700', 'hover:bg-rose-700');
                 btn.querySelector('span').innerText = 'تم البيع';
             }
         }
