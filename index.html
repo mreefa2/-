@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة سومة للوحات المميزة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --saudi-green: #006C35;
+            --saudi-green-dark: #004d25;
+            --saudi-green-light: #e6f3ed;
+            --saudi-gold: #c5a059;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #ffffff;
+            color: #0f172a;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* خلفية تفاعلية متحركة بلون أخضر غامق تتفاعل مع الماوس */
+        #interactive-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            background: radial-gradient(
+                circle 900px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(0, 77, 37, 0.25) 0%,
+                rgba(0, 40, 15, 0.1) 50%,
+                transparent 100%
+            );
+            transition: background 0.1s ease-out;
+        }
+
+        /* إزالة الحواف البيضاء ودمج شعارك بسلاسة تامة مع الخلفية */
+        .creative-logo {
+            mix-blend-mode: multiply;
+            filter: contrast(1.3) brightness(1.02);
+            background: transparent !important;
+        }
+
+        /* حاوية اللوحة للتجاوب مع الجوال */
+        .saudi-plate-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        .saudi-plate-container {
+            position: relative;
+            width: 100%;
+            min-width: 340px;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .saudi-plate {
+            background-color: #ffffff;
+            border: 3px solid #0f172a;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.25);
+            position: relative;
+            aspect-ratio: 520 / 120;
+            width: 100%;
+            color: #0f172a;
+            font-weight: bold;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        @media (min-width: 640px) {
+            .saudi-plate {
+                border-width: 4px;
+                border-radius: 16px;
+            }
+        }
+
+        .plate-border-inner {
+            border: 2px solid #0f172a;
+            margin: 3px;
+            border-radius: 8px;
+            height: calc(100% - 6px);
+            display: flex;
+            position: relative;
+            background-color: #ffffff;
+        }
+
+        @media (min-width: 640px) {
+            .plate-border-inner {
+                margin: 5px;
+                border-radius: 10px;
+                height: calc(100% - 10px);
+            }
+        }
+
+        /* الشريط الأيمن للوحة */
+        .plate-section-ksa-side {
+            width: 11%;
+            border-left: 2px solid #0f172a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2px 1px;
+            background-color: #ffffff;
+        }
+
+        .plate-section-ksa-side.side-private {
+            background-color: #ffffff;
+        }
+        .plate-section-ksa-side.side-transport-private {
+            background-color: #2563eb;
+            color: #ffffff;
+        }
+        .plate-section-ksa-side.side-transport-public {
+            background-color: #eab308;
+            color: #000000;
+        }
+
+        .plate-section-right-letters {
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            border-left: 2px solid #0f172a;
+        }
+
+        .plate-section-center-logo {
+            width: 26%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+            border-left: 2px solid #0f172a;
+        }
+
+        .plate-section-left-numbers {
+            width: 33%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .plate-half-top {
+            height: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid #0f172a;
+        }
+
+        .plate-half-bottom {
+            height: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .plate-grid-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            direction: rtl;
+        }
+
+        .plate-text-ar {
+            font-size: clamp(1.1rem, 5vw, 3.2rem);
+            line-height: 1;
+            font-family: 'Amiri', serif;
+            text-align: center;
+            font-weight: 700;
+            flex: 1;
+        }
+
+        .plate-text-en {
+            font-size: clamp(1rem, 4.5vw, 2.8rem);
+            line-height: 1;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            font-weight: 900;
+            flex: 1;
+        }
+
+        .type-pill {
+            padding: 8px 18px;
+            border-radius: 12px;
+            border: 2px solid #cbd5e1;
+            background-color: #ffffff;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #334155;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        @media (min-width: 640px) {
+            .type-pill {
+                padding: 8px 26px;
+                font-size: 1rem;
+                border-radius: 14px;
+            }
+        }
+
+        .type-pill:hover, .type-pill.active {
+            border-color: var(--saudi-green);
+            background-color: var(--saudi-green);
+            color: #ffffff;
+            box-shadow: 0 6px 15px rgba(0, 108, 53, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .sold-stamp {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-12deg) scale(0.8);
+            border: 4px double #dc2626;
+            color: #dc2626;
+            background-color: rgba(255, 255, 255, 0.96);
+            padding: 4px 20px;
+            font-size: clamp(1.4rem, 4vw, 3.8rem);
+            font-weight: 900;
+            border-radius: 12px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.35);
+            z-index: 30;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .sold-stamp.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) rotate(-12deg) scale(1);
+        }
+    </style>
+</head>
+<body class="py-6 px-4 md:px-8 flex flex-col justify-between items-center">
+
+    <!-- طبقة الخلفية التفاعلية المتحركة -->
+    <div id="interactive-bg"></div>
+
+    <main class="w-full max-w-[1400px] flex-1 space-y-6 md:space-y-8 relative z-10">
+
+        <!-- زر ملء الشاشة أعلى اليمين -->
+        <div class="flex justify-end w-full px-2">
+            <button onclick="toggleFullScreen()" title="ملء الشاشة" class="w-10 h-10 bg-white/90 hover:bg-emerald-50 text-emerald-900 rounded-xl border border-slate-200 flex items-center justify-center transition active:scale-95 shadow-sm">
+                <i data-lucide="maximize" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <!-- قسم الشعار الأصلي مدمج بسلاسة مع الخلفية -->
+        <section class="text-center relative py-2">
+            <div class="flex flex-col items-center justify-center mb-6">
+                <img src="soma-logo.png" alt="شعار منصة سومة" class="h-36 md:h-52 w-auto object-contain creative-logo">
+            </div>
+            
+            <!-- عرض اللوحة -->
+            <div class="saudi-plate-wrapper">
+                <div class="saudi-plate-container">
+                    
+                    <!-- SOLD STAMP OVERLAY -->
+                    <div id="soldStamp" class="sold-stamp">تم البيع</div>
+
+                    <div class="saudi-plate flex flex-col">
+                        <div class="plate-border-inner">
+                            
+                            <!-- 1. FAR RIGHT SIDE -->
+                            <div id="ksaSideBar" class="plate-section-ksa-side side-private">
+                                <div class="w-5 h-5 md:w-8 md:h-8 mx-auto mt-0.5 flex items-center justify-center">
+                                    <img src="اسود.png" alt="الشعار" class="w-full h-full object-contain">
+                                </div>
+                                
+                                <div class="text-[8px] md:text-[12px] font-bold text-center leading-none my-0.5 font-['Tajawal']">
+                                    السعودية
+                                </div>
+
+                                <div class="text-[10px] md:text-[16px] font-black tracking-wider flex flex-col items-center leading-tight mb-0.5">
+                                    <span>K</span>
+                                    <span>S</span>
+                                    <span>A</span>
+                                </div>
+                            </div>
+
+                            <!-- 2. RIGHT SECTION: Letters -->
+                            <div class="plate-section-right-letters">
+                                <div class="plate-half-top">
+                                    <div id="displayLettersAr" class="plate-grid-container"></div>
+                                </div>
+                                <div class="plate-half-bottom">
+                                    <div id="displayLettersEn" class="plate-grid-container"></div>
+                                </div>
+                            </div>
+
+                            <!-- 3. CENTER SECTION: Main Logo -->
+                            <div class="plate-section-center-logo">
+                                <div class="w-full h-full flex items-center justify-center p-0.5 md:p-1">
+                                    <img src="logo.png" alt="الشعار الرئيسي" class="w-full h-full object-contain">
+                                </div>
+                            </div>
+
+                            <!-- 4. LEFT SECTION: Numbers -->
+                            <div class="plate-section-left-numbers">
+                                <div class="plate-half-top">
+                                    <div id="displayNumAr" class="plate-grid-container"></div>
+                                </div>
+                                <div class="plate-half-bottom">
+                                    <div id="displayNumEn" class="plate-grid-container"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم العداد وحالة البيع -->
+        <section class="bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-lg space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto items-center">
+                
+                <!-- وقت المزاد -->
+                <div class="bg-slate-50/80 border border-slate-200 rounded-xl md:rounded-2xl p-4 text-center flex flex-col justify-between space-y-3 shadow-sm">
+                    <span class="text-xs md:text-sm font-extrabold text-emerald-900 block">وقت المزاد المباشر</span>
+                    <div id="timerDisplay" class="text-3xl md:text-4xl font-black text-slate-900">00:00</div>
+                    <div class="flex justify-center items-center gap-2 pt-1">
+                        <button onclick="startTimer()" class="bg-emerald-700 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-emerald-800 transition">بدء</button>
+                        <button onclick="stopTimer()" class="bg-slate-200 text-slate-800 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-slate-300 transition">إيقاف</button>
+                        <button onclick="resetTimer()" class="bg-slate-200 text-slate-800 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-slate-300 transition">تصفير</button>
+                    </div>
+                </div>
+
+                <!-- زر حالة البيع -->
+                <div class="bg-slate-50/80 border border-slate-200 rounded-2xl p-6 text-center flex flex-col items-center justify-center space-y-3 shadow-sm">
+                    <span class="text-xs md:text-sm font-extrabold text-emerald-900 block">حالة اللوحة في المزاد</span>
+                    <button onclick="toggleSoldStatus()" id="soldBtn" class="w-full py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-extrabold rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-md active:scale-95">
+                        <i data-lucide="shield-alert" class="w-4 h-4"></i>
+                        <span>تم البيع</span>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- قسم اختيار النوع وتعديل الحروف والأرقام -->
+        <section class="bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-lg space-y-6">
+            
+            <!-- Plate Type Selector -->
+            <div>
+                <label class="block text-center text-xs md:text-sm font-extrabold text-emerald-900 mb-3">اختر نوع اللوحة:</label>
+                <div class="flex flex-wrap justify-center items-center gap-3">
+                    <button onclick="selectPlateType('private')" class="type-pill active" id="type-private">خصوصي</button>
+                    <button onclick="selectPlateType('transport-private')" class="type-pill" id="type-transport-private">نقل خاص</button>
+                    <button onclick="selectPlateType('transport-public')" class="type-pill" id="type-transport-public">نقل عام</button>
+                </div>
+            </div>
+
+            <!-- Editable Fields -->
+            <div class="pt-4 border-t border-slate-200">
+                <p class="text-center text-xs md:text-sm font-extrabold text-emerald-900/80 mb-3">تعديل اللوحة:</p>
+                <div class="grid grid-cols-2 gap-4 max-w-lg mx-auto">
+                    <div>
+                        <label class="block text-[11px] md:text-xs font-extrabold text-emerald-900 text-center mb-1">الحروف</label>
+                        <input type="text" id="inputLettersAr" value="ف ه د" oninput="handleArabicLettersInput()" placeholder="مثال: ف ه د" class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl md:rounded-2xl px-3 py-2.5 text-center font-black text-slate-900 focus:outline-none focus:border-emerald-600 text-lg md:text-xl">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] md:text-xs font-extrabold text-emerald-900 text-center mb-1">الأرقام</label>
+                        <input type="text" id="inputNumAr" value="١ ١ ١" oninput="handleArabicNumbersInput()" placeholder="مثال: ١ ١ ١" class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl md:rounded-2xl px-3 py-2.5 text-center font-black text-slate-900 focus:outline-none focus:border-emerald-600 text-lg md:text-xl">
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="mt-8 text-center text-xs text-emerald-900 font-extrabold relative z-10 pb-4">
+        منصة سومة لبيع اللوحات المميزة - إصدار البث المباشر 🇸🇦
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // تفاعل الخلفية بلون أخضر غامق عند تحريك الماوس
+        window.addEventListener('mousemove', (e) => {
+            const x = `${e.clientX}px`;
+            const y = `${e.clientY}px`;
+            document.getElementById('interactive-bg').style.setProperty('--mouse-x', x);
+            document.getElementById('interactive-bg').style.setProperty('--mouse-y', y);
+        });
+
+        const letterMap = {
+            'أ': 'A', 'ا': 'A',
+            'ب': 'B',
+            'ح': 'J',
+            'د': 'D',
+            'ر': 'R',
+            'س': 'S',
+            'ص': 'X',
+            'ط': 'T',
+            'ع': 'E',
+            'ق': 'G',
+            'ك': 'K',
+            'ل': 'L',
+            'م': 'M',
+            'ن': 'N',
+            'ه': 'H', 'هـ': 'H',
+            'و': 'W',
+            'ى': 'Y', 'ي': 'Y',
+            'ف': 'F'
+        };
+
+        const numMap = {
+            '٠': '0', '0': '0',
+            '١': '1', '1': '1',
+            '٢': '2', '2': '2',
+            '٣': '3', '3': '3',
+            '٤': '4', '4': '4',
+            '٥': '5', '5': '5',
+            '٦': '6', '6': '6',
+            '٧': '7', '7': '7',
+            '٨': '8', '8': '8',
+            '٩': '9', '9': '9'
+        };
+
+        function handleArabicLettersInput() {
+            const rawVal = document.getElementById('inputLettersAr').value;
+            const charsAr = [];
+            const charsEn = [];
+
+            for (let char of rawVal) {
+                if (char === ' ') continue;
+                charsAr.push(char);
+                if (letterMap[char]) {
+                    charsEn.push(letterMap[char]);
+                } else {
+                    charsEn.push(char.toUpperCase());
+                }
+            }
+
+            const arContainer = document.getElementById('displayLettersAr');
+            arContainer.innerHTML = '';
+            (charsAr.length > 0 ? charsAr : ['ف', 'ه', 'د']).forEach(ch => {
+                const span = document.createElement('span');
+                span.className = 'plate-text-ar';
+                span.innerText = ch;
+                arContainer.appendChild(span);
+            });
+
+            const enContainer = document.getElementById('displayLettersEn');
+            enContainer.innerHTML = '';
+            (charsEn.length > 0 ? charsEn : ['F', 'H', 'D']).forEach(ch => {
+                const span = document.createElement('span');
+                span.className = 'plate-text-en';
+                span.innerText = ch;
+                enContainer.appendChild(span);
+            });
+        }
+
+        function handleArabicNumbersInput() {
+            const rawVal = document.getElementById('inputNumAr').value;
+            const numsAr = [];
+            const numsEn = [];
+
+            for (let char of rawVal) {
+                if (char === ' ') continue;
+                numsAr.push(char);
+                if (numMap[char] !== undefined) {
+                    numsEn.push(numMap[char]);
+                } else {
+                    numsEn.push(char);
+                }
+            }
+
+            const arContainer = document.getElementById('displayNumAr');
+            arContainer.innerHTML = '';
+            (numsAr.length > 0 ? numsAr : ['١', '١', '١']).forEach(num => {
+                const span = document.createElement('span');
+                span.className = 'plate-text-ar';
+                span.innerText = num;
+                arContainer.appendChild(span);
+            });
+
+            const enContainer = document.getElementById('displayNumEn');
+            enContainer.innerHTML = '';
+            (numsEn.length > 0 ? numsEn : ['1', '1', '1']).forEach(num => {
+                const span = document.createElement('span');
+                span.className = 'plate-text-en';
+                span.innerText = num;
+                enContainer.appendChild(span);
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            handleArabicLettersInput();
+            handleArabicNumbersInput();
+        });
+
+        function selectPlateType(typeKey) {
+            document.querySelectorAll('.type-pill').forEach(btn => btn.classList.remove('active'));
+            const selectedBtn = document.getElementById('type-' + typeKey);
+            if (selectedBtn) selectedBtn.classList.add('active');
+
+            const sideBar = document.getElementById('ksaSideBar');
+            sideBar.className = 'plate-section-ksa-side side-' + typeKey;
+        }
+
+        let isSold = false;
+        function toggleSoldStatus() {
+            isSold = !isSold;
+            const stamp = document.getElementById('soldStamp');
+            const btn = document.getElementById('soldBtn');
+            
+            if (isSold) {
+                stamp.classList.add('active');
+                btn.classList.replace('bg-rose-600', 'bg-emerald-600');
+                btn.classList.replace('hover:bg-rose-700', 'hover:bg-emerald-700');
+                btn.querySelector('span').innerText = 'إلغاء البيع';
+            } else {
+                stamp.classList.remove('active');
+                btn.classList.replace('bg-emerald-600', 'bg-rose-600');
+                btn.classList.replace('hover:bg-rose-700', 'hover:bg-rose-700');
+                btn.querySelector('span').innerText = 'تم البيع';
+            }
+        }
+
+        let timerInterval = null;
+        let seconds = 0;
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                seconds++;
+                const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
+                const secs = String(seconds % 60).padStart(2, '0');
+                document.getElementById('timerDisplay').innerText = `${mins}:${secs}`;
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+        }
+
+        function resetTimer() {
+            stopTimer();
+            seconds = 0;
+            document.getElementById('timerDisplay').innerText = "00:00";
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(err);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
