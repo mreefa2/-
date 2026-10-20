@@ -331,7 +331,7 @@
             </div>
         </section>
 
-        <!-- قسم العداد وحالة البيع (تم ضبط التناسق بالكامل) -->
+        <!-- قسم العداد وحالة البيع -->
         <section class="bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-lg space-y-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto items-stretch">
                 
@@ -346,7 +346,7 @@
                     </div>
                 </div>
 
-                <!-- زر حالة البيع (مطابق 100% لمربع وقت المزاد) -->
+                <!-- زر حالة البيع -->
                 <div class="bg-slate-50/80 border border-slate-200 rounded-xl md:rounded-2xl p-5 text-center flex flex-col justify-between items-center space-y-3 shadow-sm h-full">
                     <span class="text-xs md:text-sm font-extrabold text-emerald-900 block">حالة اللوحة في المزاد</span>
                     <div class="w-full my-auto flex items-center justify-center">
@@ -355,7 +355,7 @@
                             <span>تم البيع</span>
                         </button>
                     </div>
-                    <div class="h-[29px]"></div> <!-- عنصر موازنة لمطابقة ارتفاع أزرار التحكم في العداد -->
+                    <div class="h-[29px]"></div>
                 </div>
 
             </div>
@@ -380,7 +380,7 @@
                 <div class="grid grid-cols-2 gap-4 max-w-lg mx-auto">
                     <div>
                         <label class="block text-[11px] md:text-xs font-extrabold text-emerald-900 text-center mb-1">الحروف</label>
-                        <input type="text" id="inputLettersAr" value="ف ه د" oninput="handleArabicLettersInput()" placeholder="مثال: ف ه د" class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl md:rounded-2xl px-3 py-2.5 text-center font-black text-slate-900 focus:outline-none focus:border-emerald-600 text-lg md:text-xl">
+                        <input type="text" id="inputLettersAr" value="أ ب ج" oninput="handleArabicLettersInput()" placeholder="مثال: أ ب ج" class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl md:rounded-2xl px-3 py-2.5 text-center font-black text-slate-900 focus:outline-none focus:border-emerald-600 text-lg md:text-xl">
                     </div>
                     <div>
                         <label class="block text-[11px] md:text-xs font-extrabold text-emerald-900 text-center mb-1">الأرقام</label>
@@ -408,6 +408,7 @@
             document.getElementById('interactive-bg').style.setProperty('--mouse-y', y);
         });
 
+        // خريطة الحروف المحدثة بناءً على طلبك
         const letterMap = {
             'أ': 'A', 'ا': 'A',
             'ب': 'B',
@@ -421,12 +422,11 @@
             'ق': 'G',
             'ك': 'K',
             'ل': 'L',
-            'م': 'M',
+            'م': 'Z',
             'ن': 'N',
-            'ه': 'H', 'هـ': 'H',
-            'و': 'W',
-            'ى': 'Y', 'ي': 'Y',
-            'ف': 'F'
+            'هـ': 'H', 'ه': 'H',
+            'و': 'U',
+            'ى': 'V', 'ي': 'V'
         };
 
         const numMap = {
@@ -459,7 +459,7 @@
 
             const arContainer = document.getElementById('displayLettersAr');
             arContainer.innerHTML = '';
-            (charsAr.length > 0 ? charsAr : ['ف', 'ه', 'د']).forEach(ch => {
+            (charsAr.length > 0 ? charsAr : ['أ', 'ب', 'ح']).forEach(ch => {
                 const span = document.createElement('span');
                 span.className = 'plate-text-ar';
                 span.innerText = ch;
@@ -468,7 +468,7 @@
 
             const enContainer = document.getElementById('displayLettersEn');
             enContainer.innerHTML = '';
-            (charsEn.length > 0 ? charsEn : ['F', 'H', 'D']).forEach(ch => {
+            (charsEn.length > 0 ? charsEn : ['A', 'B', 'J']).forEach(ch => {
                 const span = document.createElement('span');
                 span.className = 'plate-text-en';
                 span.innerText = ch;
