@@ -26,7 +26,6 @@
             padding: 0;
         }
 
-        /* خلفية تفاعلية متحركة بلون أخضر غامق تتفاعل مع الماوس */
         #interactive-bg {
             position: fixed;
             top: 0;
@@ -44,14 +43,12 @@
             transition: background 0.1s ease-out;
         }
 
-        /* إزالة الحواف البيضاء ودمج الشعار بسلاسة تامة مع الخلفية */
         .creative-logo {
             mix-blend-mode: multiply;
             filter: contrast(1.3) brightness(1.02);
             background: transparent !important;
         }
 
-        /* حاوية اللوحة للتجاوب مع الجوال */
         .saudi-plate-wrapper {
             width: 100%;
             overflow-x: auto;
@@ -70,8 +67,8 @@
 
         .saudi-plate {
             background-color: #ffffff;
-            border: 3px solid #0f172a;
-            border-radius: 12px;
+            border: 4px solid #0f172a;
+            border-radius: 14px;
             box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.25);
             position: relative;
             aspect-ratio: 520 / 120;
@@ -82,35 +79,19 @@
             user-select: none;
         }
 
-        @media (min-width: 640px) {
-            .saudi-plate {
-                border-width: 4px;
-                border-radius: 16px;
-            }
-        }
-
         .plate-border-inner {
-            border: 2px solid #0f172a;
-            margin: 3px;
-            border-radius: 8px;
-            height: calc(100% - 6px);
+            border: 3px solid #0f172a;
+            margin: 4px;
+            border-radius: 10px;
+            height: calc(100% - 8px);
             display: flex;
             position: relative;
             background-color: #ffffff;
         }
 
-        @media (min-width: 640px) {
-            .plate-border-inner {
-                margin: 5px;
-                border-radius: 10px;
-                height: calc(100% - 10px);
-            }
-        }
-
-        /* الشريط الأيمن للوحة */
         .plate-section-ksa-side {
             width: 11%;
-            border-left: 2px solid #0f172a;
+            border-left: 3px solid #0f172a;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -135,7 +116,7 @@
             width: 30%;
             display: flex;
             flex-direction: column;
-            border-left: 2px solid #0f172a;
+            border-left: 3px solid #0f172a;
         }
 
         .plate-section-center-logo {
@@ -144,7 +125,7 @@
             align-items: center;
             justify-content: center;
             padding: 2px;
-            border-left: 2px solid #0f172a;
+            border-left: 3px solid #0f172a;
         }
 
         .plate-section-left-numbers {
@@ -158,7 +139,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-bottom: 2px solid #0f172a;
+            border-bottom: 3px solid #0f172a;
+            overflow: hidden;
         }
 
         .plate-half-bottom {
@@ -166,6 +148,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
         .plate-grid-container {
@@ -178,22 +161,29 @@
             direction: rtl;
         }
 
+        /* تكبير حجم الخطوط لتعويض شاشة الجوال وجعلها ضخمة وواضحة جداً للمشاهدين */
         .plate-text-ar {
-            font-size: clamp(1.1rem, 5vw, 3.2rem);
-            line-height: 1;
+            font-size: clamp(2.2rem, 8.5vw, 5rem);
+            line-height: 0.85;
             font-family: 'Amiri', serif;
             text-align: center;
             font-weight: 700;
             flex: 1;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .plate-text-en {
-            font-size: clamp(1rem, 4.5vw, 2.8rem);
+            font-size: clamp(1.8rem, 7.5vw, 4.4rem);
             line-height: 1;
             font-family: Arial, Helvetica, sans-serif;
             text-align: center;
             font-weight: 900;
             flex: 1;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .type-pill {
@@ -253,52 +243,45 @@
 </head>
 <body class="py-6 px-4 md:px-8 flex flex-col justify-between items-center">
 
-    <!-- طبقة الخلفية التفاعلية المتحركة -->
     <div id="interactive-bg"></div>
 
     <main class="w-full max-w-[1400px] flex-1 space-y-6 md:space-y-8 relative z-10">
 
-        <!-- زر ملء الشاشة أعلى اليمين -->
         <div class="flex justify-end w-full px-2">
             <button onclick="toggleFullScreen()" title="ملء الشاشة" class="w-10 h-10 bg-white/90 hover:bg-emerald-50 text-emerald-900 rounded-xl border border-slate-200 flex items-center justify-center transition active:scale-95 shadow-sm">
                 <i data-lucide="maximize" class="w-5 h-5"></i>
             </button>
         </div>
 
-        <!-- قسم الشعار الأصلي مدمج بسلاسة مع الخلفية -->
         <section class="text-center relative py-2">
             <div class="flex flex-col items-center justify-center mb-6">
                 <img src="soma-logo.png" alt="شعار منصة سومة" class="h-36 md:h-52 w-auto object-contain creative-logo">
             </div>
             
-            <!-- عرض اللوحة -->
             <div class="saudi-plate-wrapper">
                 <div class="saudi-plate-container">
                     
-                    <!-- SOLD STAMP OVERLAY -->
                     <div id="soldStamp" class="sold-stamp">تم البيع</div>
 
                     <div class="saudi-plate flex flex-col">
                         <div class="plate-border-inner">
                             
-                            <!-- 1. FAR RIGHT SIDE -->
                             <div id="ksaSideBar" class="plate-section-ksa-side side-private">
                                 <div class="w-5 h-5 md:w-8 md:h-8 mx-auto mt-0.5 flex items-center justify-center">
                                     <img src="اسود.png" alt="الشعار" class="w-full h-full object-contain">
                                 </div>
                                 
-                                <div class="text-[8px] md:text-[12px] font-bold text-center leading-none my-0.5 font-['Tajawal']">
+                                <div class="text-[9px] md:text-[12px] font-black text-center leading-none my-0.5 font-['Tajawal']">
                                     السعودية
                                 </div>
 
-                                <div class="text-[10px] md:text-[16px] font-black tracking-wider flex flex-col items-center leading-tight mb-0.5">
+                                <div class="text-[11px] md:text-[16px] font-black tracking-wider flex flex-col items-center leading-tight mb-0.5">
                                     <span>K</span>
                                     <span>S</span>
                                     <span>A</span>
                                 </div>
                             </div>
 
-                            <!-- 2. RIGHT SECTION: Letters -->
                             <div class="plate-section-right-letters">
                                 <div class="plate-half-top">
                                     <div id="displayLettersAr" class="plate-grid-container"></div>
@@ -308,14 +291,12 @@
                                 </div>
                             </div>
 
-                            <!-- 3. CENTER SECTION: Main Logo -->
                             <div class="plate-section-center-logo">
                                 <div class="w-full h-full flex items-center justify-center p-0.5 md:p-1">
                                     <img src="logo.png" alt="الشعار الرئيسي" class="w-full h-full object-contain">
                                 </div>
                             </div>
 
-                            <!-- 4. LEFT SECTION: Numbers -->
                             <div class="plate-section-left-numbers">
                                 <div class="plate-half-top">
                                     <div id="displayNumAr" class="plate-grid-container"></div>
@@ -331,11 +312,9 @@
             </div>
         </section>
 
-        <!-- قسم العداد وحالة البيع -->
         <section class="bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-lg space-y-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto items-stretch">
                 
-                <!-- وقت المزاد -->
                 <div class="bg-slate-50/80 border border-slate-200 rounded-xl md:rounded-2xl p-5 text-center flex flex-col justify-between items-center space-y-3 shadow-sm h-full">
                     <span class="text-xs md:text-sm font-extrabold text-emerald-900 block">وقت المزاد المباشر</span>
                     <div id="timerDisplay" class="text-3xl md:text-4xl font-black text-slate-900 my-auto">00:00</div>
@@ -346,7 +325,6 @@
                     </div>
                 </div>
 
-                <!-- زر حالة البيع -->
                 <div class="bg-slate-50/80 border border-slate-200 rounded-xl md:rounded-2xl p-5 text-center flex flex-col justify-between items-center space-y-3 shadow-sm h-full">
                     <span class="text-xs md:text-sm font-extrabold text-emerald-900 block">حالة اللوحة في المزاد</span>
                     <div class="w-full my-auto flex items-center justify-center">
@@ -361,10 +339,8 @@
             </div>
         </section>
 
-        <!-- قسم اختيار النوع وتعديل الحروف والأرقام -->
         <section class="bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-lg space-y-6">
             
-            <!-- Plate Type Selector -->
             <div>
                 <label class="block text-center text-xs md:text-sm font-extrabold text-emerald-900 mb-3">اختر نوع اللوحة:</label>
                 <div class="flex flex-wrap justify-center items-center gap-3">
@@ -374,7 +350,6 @@
                 </div>
             </div>
 
-            <!-- Editable Fields -->
             <div class="pt-4 border-t border-slate-200">
                 <p class="text-center text-xs md:text-sm font-extrabold text-emerald-900/80 mb-3">تعديل اللوحة:</p>
                 <div class="grid grid-cols-2 gap-4 max-w-lg mx-auto">
@@ -400,7 +375,6 @@
     <script>
         lucide.createIcons();
 
-        // تفاعل الخلفية بلون أخضر غامق عند تحريك الماوس
         window.addEventListener('mousemove', (e) => {
             const x = `${e.clientX}px`;
             const y = `${e.clientY}px`;
@@ -408,7 +382,6 @@
             document.getElementById('interactive-bg').style.setProperty('--mouse-y', y);
         });
 
-        // خريطة الحروف المحدثة بناءً على طلبك
         const letterMap = {
             'أ': 'A', 'ا': 'A',
             'ب': 'B',
