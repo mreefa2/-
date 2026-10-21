@@ -53,23 +53,23 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            padding: 10px 0;
+            padding: 5px 0;
         }
 
         .saudi-plate-container {
             position: relative;
             width: 100%;
-            max-width: 900px;
+            max-width: 100%;
             margin: 0 auto;
         }
 
         .saudi-plate {
             background-color: #ffffff;
             border: 3px solid #1e293b;
-            border-radius: 16px;
+            border-radius: 14px;
             box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.18);
             position: relative;
-            aspect-ratio: 520 / 130;
+            aspect-ratio: 520 / 145;
             width: 100%;
             color: #0f172a;
             font-weight: bold;
@@ -79,24 +79,25 @@
 
         .plate-border-inner {
             border: 2px solid #1e293b;
-            margin: 5px;
-            border-radius: 10px;
-            height: calc(100% - 10px);
+            margin: 4px;
+            border-radius: 9px;
+            height: calc(100% - 8px);
             display: flex;
             position: relative;
             background-color: #ffffff;
         }
 
+        /* تصغير عرض الشريط الأيمن للشعار والنصوص ليكون بنسبة 7% فقط (نحيف ومظبوط) */
         .plate-section-ksa-side {
-            width: 12%;
+            width: 7.5%;
             border-left: 2px solid #1e293b;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            padding: 4px 2px;
+            padding: 3px 1px;
             background-color: #ffffff;
-            color: #0f172a; /* لون موحد أسود للنص والشعار */
+            color: #0f172a;
         }
 
         .plate-section-ksa-side.side-private {
@@ -112,8 +113,9 @@
             color: #000000;
         }
 
+        /* توزيع المساحة المتبقية لتكبير أجزاء الحروف والأرقام */
         .plate-section-right-letters {
-            width: 32%;
+            width: 34.5%;
             display: flex;
             flex-direction: column;
             border-left: 2px solid #1e293b;
@@ -124,12 +126,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 4px;
+            padding: 2px;
             border-left: 2px solid #1e293b;
         }
 
         .plate-section-left-numbers {
-            width: 34%;
+            width: 36%;
             display: flex;
             flex-direction: column;
         }
@@ -159,11 +161,11 @@
             width: 100%;
             height: 100%;
             direction: rtl;
-            padding: 0 4px;
+            padding: 0 2px;
         }
 
         .plate-text-ar {
-            font-size: clamp(2rem, 7.5vw, 4.2rem);
+            font-size: clamp(2.4rem, 9.5vw, 4.8rem);
             line-height: 1;
             font-family: 'Amiri', serif;
             text-align: center;
@@ -175,7 +177,7 @@
         }
 
         .plate-text-en {
-            font-size: clamp(1.8rem, 6.5vw, 3.8rem);
+            font-size: clamp(2.1rem, 8.5vw, 4.2rem);
             line-height: 1;
             font-family: Arial, Helvetica, sans-serif;
             text-align: center;
@@ -241,21 +243,21 @@
         }
     </style>
 </head>
-<body class="py-6 px-4 md:px-8 flex flex-col justify-between items-center">
+<body class="py-4 px-2 md:px-8 flex flex-col justify-between items-center">
 
     <div id="interactive-bg"></div>
 
     <main class="w-full max-w-[1400px] flex-1 space-y-6 md:space-y-8 relative z-10">
 
-        <div class="flex justify-end w-full px-2">
+        <div class="flex justify-end w-full px-1">
             <button onclick="toggleFullScreen()" title="ملء الشاشة" class="w-10 h-10 bg-white/90 hover:bg-emerald-50 text-emerald-900 rounded-xl border border-slate-200 flex items-center justify-center transition active:scale-95 shadow-sm">
                 <i data-lucide="maximize" class="w-5 h-5"></i>
             </button>
         </div>
 
-        <section class="text-center relative py-2">
-            <div class="flex flex-col items-center justify-center mb-6">
-                <img src="soma-logo.png" alt="شعار منصة سومة" class="h-32 md:h-48 w-auto object-contain creative-logo">
+        <section class="text-center relative py-1">
+            <div class="flex flex-col items-center justify-center mb-4">
+                <img src="soma-logo.png" alt="شعار منصة سومة" class="h-28 md:h-48 w-auto object-contain creative-logo">
             </div>
             
             <div class="saudi-plate-wrapper">
@@ -266,17 +268,17 @@
                     <div class="saudi-plate flex flex-col">
                         <div class="plate-border-inner">
                             
-                            <!-- الشريط الأيمن بلون أسود واضح وعريض -->
+                            <!-- الشريط الأيمن بعرض أصغر ونحيف وفقاً للتحديد -->
                             <div id="ksaSideBar" class="plate-section-ksa-side side-private">
-                                <div class="w-4 h-4 md:w-7 md:h-7 mx-auto mt-0.5 flex items-center justify-center">
+                                <div class="w-3.5 h-3.5 md:w-6 md:h-6 mx-auto mt-0.5 flex items-center justify-center">
                                     <img src="اسود.png" alt="الشعار" class="w-full h-full object-contain">
                                 </div>
                                 
-                                <div class="text-[9px] md:text-[13px] font-black text-center leading-none my-0.5 font-['Tajawal'] text-slate-900">
+                                <div class="text-[7px] md:text-[11px] font-black text-center leading-none my-0.5 font-['Tajawal'] text-slate-900 whitespace-nowrap">
                                     السعودية
                                 </div>
 
-                                <div class="text-[12px] md:text-[18px] font-black tracking-widest flex flex-col items-center leading-tight mb-0.5 text-slate-900">
+                                <div class="text-[10px] md:text-[16px] font-black tracking-widest flex flex-col items-center leading-tight mb-0.5 text-slate-900">
                                     <span>K</span>
                                     <span>S</span>
                                     <span>A</span>
@@ -293,7 +295,7 @@
                             </div>
 
                             <div class="plate-section-center-logo">
-                                <div class="w-full h-full flex items-center justify-center p-1">
+                                <div class="w-full h-full flex items-center justify-center p-0.5">
                                     <img src="logo.png" alt="الشعار الرئيسي" class="w-full h-full object-contain">
                                 </div>
                             </div>
@@ -313,10 +315,10 @@
             </div>
         </section>
 
-        <section class="bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-lg space-y-4">
+        <section class="bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl md:rounded-3xl p-5 md:p-8 shadow-lg space-y-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto items-stretch">
                 
-                <div class="bg-slate-50/80 border border-slate-200 rounded-xl md:rounded-2xl p-5 text-center flex flex-col justify-between items-center space-y-3 shadow-sm h-full">
+                <div class="bg-slate-50/80 border border-slate-200 rounded-xl md:rounded-2xl p-4 text-center flex flex-col justify-between items-center space-y-3 shadow-sm h-full">
                     <span class="text-xs md:text-sm font-extrabold text-emerald-900 block">وقت المزاد المباشر</span>
                     <div id="timerDisplay" class="text-3xl md:text-4xl font-black text-slate-900 my-auto">00:00</div>
                     <div class="flex justify-center items-center gap-2 w-full pt-1">
@@ -326,10 +328,10 @@
                     </div>
                 </div>
 
-                <div class="bg-slate-50/80 border border-slate-200 rounded-xl md:rounded-2xl p-5 text-center flex flex-col justify-between items-center space-y-3 shadow-sm h-full">
+                <div class="bg-slate-50/80 border border-slate-200 rounded-xl md:rounded-2xl p-4 text-center flex flex-col justify-between items-center space-y-3 shadow-sm h-full">
                     <span class="text-xs md:text-sm font-extrabold text-emerald-900 block">حالة اللوحة في المزاد</span>
                     <div class="w-full my-auto flex items-center justify-center">
-                        <button onclick="toggleSoldStatus()" id="soldBtn" class="w-full py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-extrabold rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-md active:scale-95">
+                        <button onclick="toggleSoldStatus()" id="soldBtn" class="w-full py-3 bg-rose-600 hover:bg-rose-700 text-white font-extrabold rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-md active:scale-95">
                             <i data-lucide="shield-alert" class="w-4 h-4"></i>
                             <span>تم البيع</span>
                         </button>
@@ -340,7 +342,7 @@
             </div>
         </section>
 
-        <section class="bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-lg space-y-6">
+        <section class="bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl md:rounded-3xl p-5 md:p-8 shadow-lg space-y-6">
             
             <div>
                 <label class="block text-center text-xs md:text-sm font-extrabold text-emerald-900 mb-3">اختر نوع اللوحة:</label>
@@ -356,11 +358,11 @@
                 <div class="grid grid-cols-2 gap-4 max-w-lg mx-auto">
                     <div>
                         <label class="block text-[11px] md:text-xs font-extrabold text-emerald-900 text-center mb-1">الحروف (المعتمدة رسمياً)</label>
-                        <input type="text" id="inputLettersAr" value="أ ب ح" oninput="handleArabicLettersInput()" placeholder="مثال: أ ب ح" class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl md:rounded-2xl px-3 py-2.5 text-center font-black text-slate-900 focus:outline-none focus:border-emerald-600 text-lg md:text-xl">
+                        <input type="text" id="inputLettersAr" value="أ ب ح" oninput="handleArabicLettersInput()" placeholder="مثال: أ ب ح" class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl md:rounded-2xl px-3 py-2 text-center font-black text-slate-900 focus:outline-none focus:border-emerald-600 text-lg md:text-xl">
                     </div>
                     <div>
                         <label class="block text-[11px] md:text-xs font-extrabold text-emerald-900 text-center mb-1">الأرقام</label>
-                        <input type="text" id="inputNumAr" value="١ ١ ١" oninput="handleArabicNumbersInput()" placeholder="مثال: ١ ١ ١" class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl md:rounded-2xl px-3 py-2.5 text-center font-black text-slate-900 focus:outline-none focus:border-emerald-600 text-lg md:text-xl">
+                        <input type="text" id="inputNumAr" value="١ ١ ١" oninput="handleArabicNumbersInput()" placeholder="مثال: ١ ١ ١" class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl md:rounded-2xl px-3 py-2 text-center font-black text-slate-900 focus:outline-none focus:border-emerald-600 text-lg md:text-xl">
                     </div>
                 </div>
             </div>
@@ -369,7 +371,7 @@
 
     </main>
 
-    <footer class="mt-8 text-center text-xs text-emerald-900 font-extrabold relative z-10 pb-4">
+    <footer class="mt-6 text-center text-xs text-emerald-900 font-extrabold relative z-10 pb-4">
         منصة سومة لبيع اللوحات المميزة - إصدار البث المباشر 🇸🇦
     </footer>
 
