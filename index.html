@@ -53,21 +53,21 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            padding: 5px 0;
+            padding: 10px 0;
         }
 
         .saudi-plate-container {
             position: relative;
             width: 100%;
-            max-width: 100%;
+            max-width: 820px; 
             margin: 0 auto;
         }
 
         .saudi-plate {
             background-color: #ffffff;
-            border: 3px solid #1e293b;
-            border-radius: 14px;
-            box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.18);
+            border: 4px solid #1e293b;
+            border-radius: 18px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             position: relative;
             aspect-ratio: 520 / 145;
             width: 100%;
@@ -75,13 +75,21 @@
             font-weight: bold;
             overflow: hidden;
             user-select: none;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .saudi-plate:focus {
+            border-color: #006C35;
+            box-shadow: 0 0 0 5px rgba(0, 108, 53, 0.25), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
 
         .plate-border-inner {
-            border: 2px solid #1e293b;
-            margin: 4px;
-            border-radius: 9px;
-            height: calc(100% - 8px);
+            border: 2.5px solid #1e293b;
+            margin: 5px;
+            border-radius: 12px;
+            height: calc(100% - 10px);
             display: flex;
             position: relative;
             background-color: #ffffff;
@@ -89,12 +97,12 @@
 
         .plate-section-ksa-side {
             width: 7.5%;
-            border-left: 2px solid #1e293b;
+            border-left: 2.5px solid #1e293b;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            padding: 3px 1px;
+            padding: 4px 1px;
             background-color: #ffffff;
             color: #0f172a;
         }
@@ -116,7 +124,8 @@
             width: 34.5%;
             display: flex;
             flex-direction: column;
-            border-left: 2px solid #1e293b;
+            border-left: 2.5px solid #1e293b;
+            transition: width 0.3s ease;
         }
 
         .plate-section-center-logo {
@@ -125,13 +134,19 @@
             align-items: center;
             justify-content: center;
             padding: 2px;
-            border-left: 2px solid #1e293b;
+            border-left: 2.5px solid #1e293b;
+            transition: all 0.3s ease;
+        }
+
+        .plate-section-center-logo.hidden {
+            display: none !important;
         }
 
         .plate-section-left-numbers {
             width: 36%;
             display: flex;
             flex-direction: column;
+            transition: width 0.3s ease;
         }
 
         .plate-half-top {
@@ -139,8 +154,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-bottom: 2px solid #1e293b;
+            border-bottom: 2.5px solid #1e293b;
             overflow: hidden;
+            position: relative;
         }
 
         .plate-half-bottom {
@@ -149,6 +165,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            position: relative;
         }
 
         .plate-grid-container {
@@ -173,9 +190,10 @@
             padding: 0 2px;
         }
 
+        /* تعديل احترافي لضبط جميع الحروف العربية وسحبها للمنتصف تماماً */
         .plate-text-ar {
             font-size: clamp(2.4rem, 9.5vw, 4.8rem);
-            line-height: 1;
+            line-height: 0.8;
             font-family: 'Amiri', serif;
             text-align: center;
             font-weight: 700;
@@ -183,10 +201,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100%;
+            transform: translateY(-5%); /* رفعة خفيفة لتوسيط ذيل الحروف مثل (ح) في المنتصف تماماً */
         }
 
         .plate-text-en {
-            font-size: clamp(2.1rem, 8.5vw, 4.2rem);
+            font-size: clamp(2.4rem, 9.5vw, 4.8rem);
             line-height: 1;
             font-family: Arial, Helvetica, sans-serif;
             text-align: center;
@@ -195,14 +215,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100%;
         }
 
         .type-pill {
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 8px;
             border: 1px solid #cbd5e1;
             background-color: #ffffff;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
             color: #334155;
             transition: all 0.2s ease;
@@ -216,6 +237,33 @@
             box-shadow: 0 3px 8px rgba(0, 108, 53, 0.2);
         }
 
+        .logo-pill {
+            width: 38px;
+            height: 38px;
+            padding: 4px;
+            border-radius: 10px;
+            border: 1.5px solid #cbd5e1;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .logo-pill:hover, .logo-pill.active {
+            border-color: var(--saudi-green);
+            background-color: var(--saudi-green-light);
+            box-shadow: 0 3px 8px rgba(0, 108, 53, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .logo-pill img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
         .sold-stamp {
             position: absolute;
             top: 50%;
@@ -224,8 +272,8 @@
             border: 4px double #dc2626;
             color: #dc2626;
             background-color: rgba(255, 255, 255, 0.96);
-            padding: 4px 20px;
-            font-size: clamp(1.4rem, 4vw, 3.8rem);
+            padding: 6px 24px;
+            font-size: clamp(1.8rem, 5vw, 4.8rem);
             font-weight: 900;
             border-radius: 12px;
             letter-spacing: 0.1em;
@@ -247,18 +295,17 @@
 
     <div id="interactive-bg"></div>
 
-    <main class="w-full max-w-[1400px] flex-1 space-y-4 relative z-10">
+    <main class="w-full max-w-[1400px] flex-1 space-y-4 relative z-10 flex flex-col items-center">
 
-        <div class="flex justify-end w-full px-1">
+        <div class="flex justify-end w-full px-1 max-w-2xl">
             <button onclick="toggleFullScreen()" title="ملء الشاشة" class="w-10 h-10 bg-white/90 hover:bg-emerald-50 text-emerald-900 rounded-xl border border-slate-200 flex items-center justify-center transition active:scale-95 shadow-sm">
                 <i data-lucide="maximize" class="w-5 h-5"></i>
             </button>
         </div>
 
-        <section class="text-center relative py-1 space-y-3">
-            <!-- تكبير الشعار ليصل لدرجة العرض والارتفاع المطلوبة داخل الإطار الأحمر -->
-            <div class="flex flex-col items-center justify-center my-2">
-                <img src="soma-logo.png" alt="شعار منصة سومة" class="h-44 md:h-72 w-auto max-w-[85vw] object-contain creative-logo">
+        <section class="text-center relative py-1 space-y-3 w-full">
+            <div class="flex flex-col items-center justify-center my-1">
+                <img src="soma-logo.png" alt="شعار منصة سومة" class="h-32 md:h-48 w-auto max-w-[85vw] object-contain creative-logo">
             </div>
             
             <div class="saudi-plate-wrapper">
@@ -266,26 +313,27 @@
                     
                     <div id="soldStamp" class="sold-stamp">تم البيع</div>
 
-                    <div class="saudi-plate flex flex-col">
+                    <!-- اللوحة الكبيرة قابلة للضغط والكتابة المباشرة -->
+                    <div id="mainPlate" tabindex="0" class="saudi-plate flex flex-col" title="اضغط هنا للكتابة المباشرة">
                         <div class="plate-border-inner">
                             
                             <div id="ksaSideBar" class="plate-section-ksa-side side-private">
-                                <div class="w-3.5 h-3.5 md:w-6 md:h-6 mx-auto mt-0.5 flex items-center justify-center">
+                                <div class="w-4 h-4 md:w-8 md:h-8 mx-auto mt-0.5 flex items-center justify-center">
                                     <img src="اسود.png" alt="الشعار" class="w-full h-full object-contain">
                                 </div>
                                 
-                                <div class="text-[7px] md:text-[11px] font-black text-center leading-none my-0.5 font-['Tajawal'] text-slate-900 whitespace-nowrap">
+                                <div class="text-[9px] md:text-[14px] font-black text-center leading-none my-0.5 font-['Tajawal'] text-slate-900 whitespace-nowrap">
                                     السعودية
                                 </div>
 
-                                <div class="text-[10px] md:text-[16px] font-black tracking-widest flex flex-col items-center leading-tight mb-0.5 text-slate-900">
+                                <div class="text-[12px] md:text-[22px] font-black tracking-widest flex flex-col items-center leading-tight mb-0.5 text-slate-900">
                                     <span>K</span>
                                     <span>S</span>
                                     <span>A</span>
                                 </div>
                             </div>
 
-                            <div class="plate-section-right-letters">
+                            <div id="rightLettersSection" class="plate-section-right-letters">
                                 <div class="plate-half-top">
                                     <div id="displayLettersAr" class="plate-grid-container"></div>
                                 </div>
@@ -294,13 +342,14 @@
                                 </div>
                             </div>
 
-                            <div class="plate-section-center-logo">
+                            <!-- الشعار الأوسط المتركز -->
+                            <div id="centerLogoSection" class="plate-section-center-logo">
                                 <div class="w-full h-full flex items-center justify-center p-0.5">
-                                    <img src="logo.png" alt="الشعار الرئيسي" class="w-full h-full object-contain">
+                                    <img id="centerLogoImg" src="logo.png" alt="الشعار الرئيسي" class="w-full h-full object-contain transition-transform duration-200">
                                 </div>
                             </div>
 
-                            <div class="plate-section-left-numbers">
+                            <div id="leftNumbersSection" class="plate-section-left-numbers">
                                 <div class="plate-half-top">
                                     <div id="displayNumAr" class="plate-grid-container-num"></div>
                                 </div>
@@ -314,28 +363,48 @@
                 </div>
             </div>
 
-            <!-- كافة أدوات التحكم تحت اللوحة مباشرة وبدون أي خلفية مربعة -->
+            <!-- أدوات التحكم تحت اللوحة -->
             <div class="pt-2 space-y-3 max-w-md mx-auto">
+                
                 <!-- اختيار نوع اللوحة -->
-                <div class="flex flex-wrap justify-center items-center gap-1.5">
-                    <button onclick="selectPlateType('private')" class="type-pill active" id="type-private">خصوصي</button>
-                    <button onclick="selectPlateType('transport-private')" class="type-pill" id="type-transport-private">نقل خاص</button>
-                    <button onclick="selectPlateType('transport-public')" class="type-pill" id="type-transport-public">نقل عام</button>
-                </div>
-
-                <!-- خيارات تعديل اللوحة -->
-                <div class="grid grid-cols-2 gap-2">
-                    <div>
-                        <label class="block text-[10px] font-bold text-emerald-900/90 text-center mb-0.5">الحروف</label>
-                        <input type="text" id="inputLettersAr" value="أ ب ح" oninput="handleArabicLettersInput()" placeholder="مثال: أ ب ح" class="w-full bg-white/80 border border-slate-300 rounded-lg px-2 py-1 text-center font-bold text-slate-800 focus:outline-none focus:border-emerald-600 text-xs shadow-sm">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-emerald-900/90 text-center mb-0.5">الأرقام</label>
-                        <input type="text" id="inputNumAr" value="١ ١ ١" oninput="handleArabicNumbersInput()" placeholder="مثال: ١ ١ ١" class="w-full bg-white/80 border border-slate-300 rounded-lg px-2 py-1 text-center font-bold text-slate-800 focus:outline-none focus:border-emerald-600 text-xs shadow-sm">
+                <div class="flex flex-col items-center gap-1">
+                    <span class="text-[10px] font-bold text-emerald-900/90">نوع اللوحة</span>
+                    <div class="flex flex-wrap justify-center items-center gap-1.5">
+                        <button onclick="selectPlateType('private')" class="type-pill active" id="type-private">خصوصي</button>
+                        <button onclick="selectPlateType('transport-private')" class="type-pill" id="type-transport-private">نقل خاص</button>
+                        <button onclick="selectPlateType('transport-public')" class="type-pill" id="type-transport-public">نقل عام</button>
                     </div>
                 </div>
 
-                <!-- خيارات الوقت وحالة المزاد مصغرة ومباشرة بدون خلفية -->
+                <!-- خانة اختيار الشعارات -->
+                <div class="flex flex-col items-center gap-1.5 pt-1 border-t border-slate-200/60">
+                    <div class="relative w-full flex items-center justify-center my-0.5">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                            <div class="w-full border-t border-emerald-900/25"></div>
+                        </div>
+                        <span class="relative px-3 bg-[#f8fafc] text-[11px] font-black text-emerald-900 tracking-wider shadow-sm rounded-full border border-emerald-900/15 py-0.5">شعارات</span>
+                    </div>
+                    
+                    <div class="flex flex-wrap justify-center items-center gap-2">
+                        <button onclick="changeCenterLogo('logo.png', 'swords')" class="logo-pill active" id="logo-swords" title="السيفين والنخلة ملون">
+                            <img src="logo.png" alt="ملون">
+                        </button>
+                        <button onclick="changeCenterLogo('سيفين اسود.png', 'swords-black')" class="logo-pill" id="logo-swords-black" title="السيفين والنخلة أسود">
+                            <img src="سيفين اسود.png" alt="أسود">
+                        </button>
+                        <button onclick="changeCenterLogo('رؤيه.png', 'vision')" class="logo-pill" id="logo-vision" title="رؤية 2030">
+                            <img src="رؤيه.png" alt="الرؤية">
+                        </button>
+                        <button onclick="changeCenterLogo('الدرعية.png', 'diriyah')" class="logo-pill" id="logo-diriyah" title="الدرعية">
+                            <img src="الدرعية.png" alt="الدرعية">
+                        </button>
+                        <button onclick="changeCenterLogo('الحجر.png', 'hegra')" class="logo-pill" id="logo-hegra" title="الحجر">
+                            <img src="الحجر.png" alt="الحجر">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- خيارات الوقت وحالة المزاد -->
                 <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-200/60">
                     <!-- المؤقت -->
                     <div class="flex flex-col items-center justify-center space-y-1">
@@ -350,7 +419,7 @@
                         </div>
                     </div>
 
-                    <!-- حالة اللوحة (تم البيع) -->
+                    <!-- حالة اللوحة -->
                     <div class="flex flex-col items-center justify-center space-y-1">
                         <span class="text-[10px] font-bold text-emerald-900/90 mb-0.5">حالة اللوحة</span>
                         <button onclick="toggleSoldStatus()" id="soldBtn" class="w-full py-1 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-lg text-[10px] transition flex items-center justify-center gap-1 shadow-sm active:scale-95">
@@ -412,75 +481,96 @@
             '٩': { ar: '٩', en: '9' }, '9': { ar: '٩', en: '9' }
         };
 
-        function handleArabicLettersInput() {
-            const inputField = document.getElementById('inputLettersAr');
-            const rawVal = inputField.value;
-            const charsAr = [];
-            const charsEn = [];
+        let currentLetters = ['أ', 'ب', 'ح'];
+        let currentNums = ['١', '١', '١'];
 
-            for (let char of rawVal) {
-                if (char === ' ') continue;
-                if (validLetterMap[char]) {
-                    charsAr.push(char);
-                    charsEn.push(validLetterMap[char]);
-                }
-            }
-
+        function updatePlateDisplay() {
             const arContainer = document.getElementById('displayLettersAr');
+            const enContainer = document.getElementById('displayLettersEn');
             arContainer.innerHTML = '';
-            (charsAr.length > 0 ? charsAr : ['أ', 'ب', 'ح']).forEach(ch => {
-                const span = document.createElement('span');
-                span.className = 'plate-text-ar';
-                span.innerText = ch;
-                arContainer.appendChild(span);
+            enContainer.innerHTML = '';
+
+            currentLetters.forEach(ch => {
+                const spanAr = document.createElement('span');
+                spanAr.className = 'plate-text-ar';
+                spanAr.innerText = ch;
+                arContainer.appendChild(spanAr);
+
+                const spanEn = document.createElement('span');
+                spanEn.className = 'plate-text-en';
+                spanEn.innerText = validLetterMap[ch] || 'A';
+                enContainer.appendChild(spanEn);
             });
 
-            const enContainer = document.getElementById('displayLettersEn');
-            enContainer.innerHTML = '';
-            (charsEn.length > 0 ? charsEn : ['A', 'B', 'J']).forEach(ch => {
-                const span = document.createElement('span');
-                span.className = 'plate-text-en';
-                span.innerText = ch;
-                enContainer.appendChild(span);
+            const arNumContainer = document.getElementById('displayNumAr');
+            const enNumContainer = document.getElementById('displayNumEn');
+            arNumContainer.innerHTML = '';
+            enNumContainer.innerHTML = '';
+
+            currentNums.forEach(num => {
+                const mapObj = numMap[num] || { ar: '١', en: '1' };
+                
+                const spanAr = document.createElement('span');
+                spanAr.className = 'plate-text-ar';
+                spanAr.innerText = mapObj.ar;
+                arNumContainer.appendChild(spanAr);
+
+                const spanEn = document.createElement('span');
+                spanEn.className = 'plate-text-en';
+                spanEn.innerText = mapObj.en;
+                enNumContainer.appendChild(spanEn);
             });
         }
 
-        function handleArabicNumbersInput() {
-            const rawVal = document.getElementById('inputNumAr').value;
-            const numsAr = [];
-            const numsEn = [];
+        const mainPlate = document.getElementById('mainPlate');
 
-            for (let char of rawVal) {
-                if (char === ' ') continue;
-                if (numMap[char] !== undefined) {
-                    numsAr.push(numMap[char].ar);
-                    numsEn.push(numMap[char].en);
+        mainPlate.addEventListener('keydown', (e) => {
+            const key = e.key;
+
+            if (key === 'Backspace') {
+                e.preventDefault();
+                if (currentNums.length > 0) {
+                    currentNums.pop();
+                } else if (currentLetters.length > 0) {
+                    currentLetters.pop();
                 }
+                updatePlateDisplay();
+                return;
             }
 
-            const arContainer = document.getElementById('displayNumAr');
-            arContainer.innerHTML = '';
-            (numsAr.length > 0 ? numsAr : ['١', '١', '١']).forEach(num => {
-                const span = document.createElement('span');
-                span.className = 'plate-text-ar';
-                span.innerText = num;
-                arContainer.appendChild(span);
-            });
+            if (validLetterMap[key]) {
+                e.preventDefault();
+                if (currentLetters.length < 3) {
+                    currentLetters.push(key);
+                    updatePlateDisplay();
+                }
+                return;
+            }
 
-            const enContainer = document.getElementById('displayNumEn');
-            enContainer.innerHTML = '';
-            (numsEn.length > 0 ? numsEn : ['1', '1', '1']).forEach(num => {
-                const span = document.createElement('span');
-                span.className = 'plate-text-en';
-                span.innerText = num;
-                enContainer.appendChild(span);
-            });
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            handleArabicLettersInput();
-            handleArabicNumbersInput();
+            if (numMap[key] !== undefined) {
+                e.preventDefault();
+                if (currentNums.length < 4) {
+                    currentNums.push(key);
+                    updatePlateDisplay();
+                }
+                return;
+            }
         });
+
+        function changeCenterLogo(logoPath, key) {
+            const img = document.getElementById('centerLogoImg');
+            img.src = logoPath;
+            
+            if (key === 'swords-black') {
+                img.style.transform = 'scale(0.65)';
+            } else {
+                img.style.transform = 'scale(1)';
+            }
+
+            document.querySelectorAll('.logo-pill').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.getElementById('logo-' + key);
+            if (activeBtn) activeBtn.classList.add('active');
+        }
 
         function selectPlateType(typeKey) {
             document.querySelectorAll('.type-pill').forEach(btn => btn.classList.remove('active'));
@@ -489,7 +579,25 @@
 
             const sideBar = document.getElementById('ksaSideBar');
             sideBar.className = 'plate-section-ksa-side side-' + typeKey;
+
+            const centerLogo = document.getElementById('centerLogoSection');
+            const rightLetters = document.getElementById('rightLettersSection');
+            const leftNumbers = document.getElementById('leftNumbersSection');
+
+            if (typeKey === 'transport-private' || typeKey === 'transport-public') {
+                centerLogo.classList.add('hidden');
+                rightLetters.style.width = '48%';
+                leftNumbers.style.width = '44.5%';
+            } else {
+                centerLogo.classList.remove('hidden');
+                rightLetters.style.width = '34.5%';
+                leftNumbers.style.width = '36%';
+            }
         }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updatePlateDisplay();
+        });
 
         let isSold = false;
         function toggleSoldStatus() {
